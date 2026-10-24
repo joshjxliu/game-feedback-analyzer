@@ -116,8 +116,6 @@ OPENAI_API_KEY=your_api_key
 OPENAI_MODEL=your_available_model
 ```
 
-Do not commit `.env` or API keys to version control. API calls may incur charges depending on the provider account and usage.
-
 ## Run the application
 
 Start the dashboard:
