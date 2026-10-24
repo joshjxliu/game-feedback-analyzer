@@ -1,0 +1,5 @@
+openai
+pandas
+python-dotenv
+streamlit
+plotly  # Listed but currently unused in the codebase, may be used in future updates.

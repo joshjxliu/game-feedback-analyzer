@@ -1,0 +1,12 @@
+Analyze public game-player feedback.
+
+For each comment return:
+- language: en, zh, ja, ko, etc.
+- sentiment: positive, neutral, negative
+- issue_category: gameplay, balance, characters, story, performance, bugs, monetization, localization, customer_support, content, other
+- severity: low, medium, high
+- localization_issue: true/false
+- summary: one sentence
+- actionable_insight: one sentence describing what a product team could investigate
+
+Do not invent facts. Return only the requested JSON structure.
