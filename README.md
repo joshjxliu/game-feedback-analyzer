@@ -1,75 +1,82 @@
 # Game Feedback Analyzer
 
-A small portfolio project exploring how an LLM can help a game product team organize multilingual player feedback. The intended workflow is to turn free-form comments into structured labels and summaries that can be reviewed in a dashboard.
+A work-in-progress Python application exploring how a large language model (LLM) can help organize multilingual game-player feedback into structured information for product teams.
 
-**Current status:** Starter implementation / work in progress. The included feedback is synthetic demo data, and several known issues listed below have not been fixed yet. Do not present the demo data or its outputs as real player research.
+The prototype accepts comments from a CSV file, uses an LLM API to classify each comment, and presents the results in a small dashboard. It is intended as decision support for human review—not as a replacement for product, localization, or community experts.
 
-## What it does
+## Features
 
-The intended workflow is:
+- **CSV preprocessing:** checks required columns, trims comment text, removes blank comments and duplicate IDs, and supplies optional metadata columns when missing.
+- **LLM-based classification:** assigns each comment a language, sentiment, issue category, severity, and localization-issue flag.
+- **Structured results:** generates a concise summary and a suggested actionable insight for each comment.
+- **Summary dashboard:** displays counts and bar charts for sentiment and issue categories, alongside a table of analyzed comments.
+- **Command-line output:** exports analyzed comments to CSV and aggregate counts to JSON.
+- **Defined categories:** uses a consistent issue taxonomy: `gameplay`, `balance`, `characters`, `story`, `performance`, `bugs`, `monetization`, `localization`, `customer_support`, `content`, and `other`.
 
-1. **Load feedback** from a CSV file.
-2. **Preprocess it** with Python and Pandas by checking required columns, trimming text, removing blank comments and duplicate IDs, and adding missing optional metadata columns.
-3. **Analyze batches with an LLM API** to classify language, sentiment, issue category, severity, localization concerns, and generate a short summary and suggested follow-up insight.
-4. **Merge the model results** with the original comments using each comment's ID.
-5. **Summarize and display results** in a small Streamlit dashboard.
+This project calls an existing LLM through an API; it does not train its own model. It does not automatically scrape Reddit, YouTube, HoYoLAB, or other websites. Feedback must be provided as a CSV.
 
-This project calls an existing LLM through an API; it does **not** train its own model. It also does **not** automatically scrape Reddit, YouTube, HoYoLAB, or other sites. A CSV must be supplied by the user.
+## Workflow
+
+```text
+CSV feedback
+    ↓
+Validate and clean with Pandas
+    ↓
+Split comments into batches
+    ↓
+Call the LLM API with a classification prompt
+    ↓
+Parse structured JSON and merge results by ID
+    ↓
+Aggregate counts
+    ↓
+Streamlit dashboard or CSV/JSON output
+```
 
 ## Repository structure
 
 ```text
 game-feedback-analyzer/
-├── app.py
+├── app.py                    # Streamlit dashboard
 ├── README.md
-├── requirements.txt
-├── .env.example
+├── requirements.txt          # Python dependencies
+├── .env.example              # Example API configuration
 ├── .gitignore
 ├── data/
-│   └── sample_feedback.csv
+│   └── sample_feedback.csv   # Synthetic demonstration comments
 ├── prompts/
-│   └── classify.txt
+│   └── classify.txt          # LLM instructions and category definitions
 ├── src/
-│   ├── llm.py
-│   └── pipeline.py
+│   ├── llm.py                # LLM API call and output schema
+│   └── pipeline.py           # Cleaning, batching, merging, and summaries
 ├── tests/
-│   └── test_pipeline.py
-└── outputs/
-    └── .gitkeep
+│   └── test_pipeline.py      # Basic preprocessing test
+└── outputs/                  # Generated command-line results
 ```
 
-- **`app.py`** — Streamlit interface. Accepts an uploaded CSV or loads the sample dataset, lets the user select an LLM batch size, runs the analysis, and displays summary metrics, charts, and the classified records.
-- **`src/pipeline.py`** — Coordinates loading, cleaning, batching, joining results, and calculating aggregate counts.
-- **`src/llm.py`** — Builds the prompt, calls the configured LLM API, requests a defined JSON structure, and parses the response.
-- **`prompts/classify.txt`** — Instructions for the model. It defines the categories and fields expected from each comment.
-- **`data/sample_feedback.csv`** — Eight synthetic example comments used to demonstrate the expected input format. They are not a real or representative sample of player opinions.
-- **`outputs/`** — The command-line workflow writes `analyzed_feedback.csv` and `summary.json` here. The folder contains `.gitkeep` so Git can track the otherwise empty directory.
-- **`tests/test_pipeline.py`** — One basic automated test for dropping blank comments and duplicate IDs during preprocessing. It does not evaluate the LLM.
-- **`.env.example`** — Template for local API configuration. Copy it to `.env` and add a valid API key locally.
-- **`.gitignore`** — Excludes local secrets, virtual environments, caches, and generated output files from Git.
-- **`requirements.txt`** — Lists the Python packages used or planned for the app: the OpenAI SDK, Pandas, python-dotenv, Streamlit, and Plotly. Plotly is currently unused, and the test runner is not listed here.
-
-## How the main functions work
+## How it works
 
 ### `src/pipeline.py`
 
-- **`load_feedback(path)`** reads a CSV into a Pandas DataFrame, verifies that `id` and `text` exist, normalizes text, removes blank entries and repeated IDs, and adds empty `source`/`date` columns if they are absent.
-- **`chunks(records, size)`** splits records into smaller lists so the program can submit several comments in one API request instead of calling the API once per comment.
-- **`analyze_dataframe(df, batch_size=10)`** converts rows into records, calls `classify_batch()` for each batch, then merges model results into the input DataFrame by `id`.
-- **`build_summary(df)`** counts comments by sentiment, issue category, and language, and counts high-severity and localization-flagged comments. These are basic counts, not a statistical study or proof that a problem is widespread.
+- **`load_feedback(path)`** reads the CSV, checks that `id` and `text` are present, preserves any supplied language label as `provided_language`, trims text, removes blank comments and duplicate IDs, and adds `source` and `date` columns if absent.
+- **`chunks(records, size)`** divides comments into batches to reduce the number of individual API calls.
+- **`analyze_dataframe(df, batch_size=10)`** sends each batch to `classify_batch()`, then joins the AI results to the original records using `id`.
+- **`build_summary(df)`** counts comments by sentiment, issue category, and predicted language, plus high-severity and localization-flagged comments.
 
 ### `src/llm.py`
 
-- **`SCHEMA`** describes the required JSON fields, including `id`, `language`, `sentiment`, `issue_category`, `severity`, `localization_issue`, `summary`, and `actionable_insight`.
-- **`classify_batch(records)`** reads `prompts/classify.txt`, appends a batch of comments, sends the request to the configured LLM using the OpenAI Responses API with structured output, and parses the returned JSON. A valid JSON structure does not guarantee that the model's classifications are correct.
+- **`SCHEMA`** defines the expected response format and constrains sentiment, severity, and issue category to predefined values.
+- **`classify_batch(records)`** combines the classification prompt with a batch of comments, calls the OpenAI Responses API with structured output, and parses the returned JSON.
+
+Structured output constrains the response format, but it does not guarantee that a classification is semantically correct. Model predictions should be checked against human judgments.
 
 ### `app.py`
 
-The app uses Streamlit to display the input preview, provide a **Run AI analysis** button, and show metrics, bar charts, and a table of analyzed comments. The interface calls the pipeline functions rather than reimplementing the data-processing logic itself.
+The Streamlit interface lets users upload a CSV or use the included sample data, choose an LLM batch size, run the pipeline, and explore summary metrics, bar charts, and the resulting comment-level table.
 
 ## Input format
 
-The CSV must contain `id` and `text`. The `source` and `date` fields are optional but useful for documenting where and when feedback was posted.
+The CSV must contain `id` and `text`. `source` and `date` are optional metadata fields. An optional `language` field is preserved as `provided_language`, while `language` in the analyzed output refers to the model's prediction.
 
 ```csv
 id,text,source,date
@@ -78,69 +85,79 @@ id,text,source,date
 003,"新版本运行很卡。",HoYoLAB,2026-09-03
 ```
 
-These rows are illustrative only. For a real project, collect public feedback only from sources whose terms permit the planned collection and use. Record sources and collection dates, avoid collecting unnecessary personal information, and document the limitations of the sample.
+The rows above are illustrative examples, not real research data. The repository's `data/sample_feedback.csv` contains synthetic demonstration comments and should not be treated as representative evidence of player opinions.
 
-## Setup and run
+Use feedback only from sources whose terms permit the intended collection and use. Avoid collecting unnecessary personal information and document the sources and time period for any real dataset. Keep IDs unique, stable, and consistently formatted so that model results can be matched back to their original comments.
 
-Python 3.10+ is recommended.
+## Setup
 
-```bash
-# Create and activate a virtual environment (Windows PowerShell)
+Python 3.10 or later is recommended.
+
+**Windows PowerShell**
+
+```powershell
 python -m venv .venv
-.venv\Scripts\Activate.ps1
-
-# macOS/Linux activation:
-# source .venv/bin/activate
-
-pip install -r requirements.txt
+.\.venv\Scripts\Activate.ps1
+python -m pip install -r requirements.txt
 ```
 
-Copy `.env.example` to `.env`, then set a valid API key and a model available to your account:
+**macOS / Linux**
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+```
+
+Create a local `.env` file based on `.env.example` and configure an API key and model available to the account:
 
 ```text
-OPENAI_API_KEY=your_key_here
+OPENAI_API_KEY=your_api_key
 OPENAI_MODEL=your_available_model
 ```
 
-**Never commit `.env` or your API key to GitHub.**
+Do not commit `.env` or API keys to version control. API calls may incur charges depending on the provider account and usage.
 
-Run the dashboard:
+## Run the application
+
+Start the dashboard:
 
 ```bash
 streamlit run app.py
 ```
 
-Or run the command-line pipeline:
+To run the command-line pipeline and write output files:
 
 ```bash
 python -m src.pipeline data/sample_feedback.csv
 ```
 
-The command-line pipeline is intended to write `outputs/analyzed_feedback.csv` and `outputs/summary.json`. Both workflows require a working API configuration for actual LLM analysis.
+The command-line workflow writes:
 
-To run the existing test, install `pytest` if needed and run:
+- `outputs/analyzed_feedback.csv` — original comments and model-generated fields.
+- `outputs/summary.json` — aggregate counts by sentiment, category, and language, plus severity and localization counts.
+
+Actual classification requires a working API configuration and network access. The dashboard displays charts in the browser; the command-line workflow writes CSV and JSON files.
+
+## Tests
+
+The repository includes a basic test for input cleaning. Install `pytest` if it is not already available, then run:
 
 ```bash
 python -m pytest
 ```
 
-## Evaluation and intended improvements
+The current test does not call the LLM or measure classification accuracy.
 
-The next important step is to create a small human-labeled evaluation set (for example, 30–50 comments) with reference labels for sentiment and issue category. Compare model predictions against those labels, inspect errors by language/category, revise the prompt, and measure the change. Do not invent accuracy figures; report only results from an actual evaluation.
+## Current limitations and future work
 
-Potential improvements include stricter allowed-category validation, robust checking that each input ID has exactly one corresponding model result, error/retry and rate-limit handling, language/category filters, trend analysis over time, and a better dashboard.
+- **Evaluation is not implemented:** there is no human-labeled evaluation set or systematic measurement of classification quality yet.
+- **Data collection is manual:** the application accepts CSV input but does not collect comments from external platforms.
+- **ID validation can be strengthened:** the pipeline relies on IDs to merge model output with input data. Robust checks for missing IDs, input/output ID mismatches, and numeric-versus-string ID handling remain future improvements.
+- **API resilience can be improved:** retries, rate-limit handling, and clearer handling of incomplete or invalid model responses are not yet implemented.
+- **Analysis is exploratory:** summary values are counts, not proof that an issue is widespread. Language groups and sources may have different sample sizes or biases.
+- **Dependencies can be cleaned up:** Plotly is listed in `requirements.txt` but is not currently used by the application; `pytest` is required for tests but is not currently listed there.
 
-## Known issues in this starter
+## Motivation
 
-These are intentionally documented rather than presented as fixed:
-
-1. **Language-column collision:** the sample CSV contains a `language` column, and the LLM response also returns `language`. The current merge can rename these columns to `language_x` / `language_y`, while the summary and dashboard expect `language`; this can cause a runtime error. Decide how to preserve supplied metadata versus model-predicted language, then update the merge and downstream code consistently.
-2. **Uploaded CSV preprocessing:** `app.py` currently reads an uploaded CSV directly with `pandas.read_csv()` rather than passing it through `load_feedback()`. Uploaded files therefore do not receive the same preprocessing and validation as the sample file.
-3. **Category schema:** the prompt lists issue categories, but the JSON schema currently allows `issue_category` to be any string. Add an allowed-value enum to standardize labels.
-4. **Evaluation is not implemented:** the current test only checks input cleaning. There is no evaluation-set loader, metric calculation, prompt comparison, or model-quality test yet.
-5. **Collection is manual:** no external-platform ingestion or scraping code has been implemented.
-6. **Dependencies:** Plotly is listed but unused, and `pytest` is needed to run the test but is not listed in `requirements.txt`.
-
-## Why this project
-
-The goal is to investigate whether an LLM-based tool can help a game team triage multilingual player feedback, surface recurring themes, and flag possible localization or product issues for human review. It is intended as **decision support**, not as a replacement for human judgment: model errors, sampling bias, differences between language communities, and comment volume must all be considered before drawing product conclusions.
+The project investigates whether an LLM-based tool can help a game team triage multilingual feedback, identify recurring topics, and flag potential product or localization issues for human review. Its usefulness should be assessed through a labeled evaluation set and careful review of model errors before making product decisions from its output.
