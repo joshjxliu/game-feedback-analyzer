@@ -15,24 +15,6 @@ The prototype accepts comments from a CSV file, uses an LLM API to classify each
 
 This project calls an existing LLM through an API; it does not train its own model. It does not automatically scrape Reddit, YouTube, HoYoLAB, or other websites. Feedback must be provided as a CSV.
 
-## Workflow
-
-```text
-CSV feedback
-    ↓
-Validate and clean with Pandas
-    ↓
-Split comments into batches
-    ↓
-Call the LLM API with a classification prompt
-    ↓
-Parse structured JSON and merge results by ID
-    ↓
-Aggregate counts
-    ↓
-Streamlit dashboard or CSV/JSON output
-```
-
 ## Repository structure
 
 ```text
