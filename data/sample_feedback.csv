@@ -1,9 +1,101 @@
 id,text,source,date,language
-demo-001,"The new character feels great, but the burst animation is too long.",Reddit,2026-09-01,en
-demo-002,"新角色的技能很有意思，但是活动奖励太少了。",HoYoLAB,2026-09-02,zh
-demo-003,"ローカライズの一部が不自然で、キャラクターのニュアンスが失われています。",YouTube,2026-09-03,ja
-demo-004,"The game runs poorly on my phone after the update. Lots of stuttering.",Reddit,2026-09-03,en
-demo-005,"這次活動故事很好看，希望以後可以有更多角色互動。",HoYoLAB,2026-09-04,zh
-demo-006,"The weapon banner feels too expensive for free-to-play players.",Reddit,2026-09-05,en
-demo-007,"日本語の説明が英語版と少し違っていて、効果が分かりにくいです。",YouTube,2026-09-06,ja
-demo-008,"The latest combat event is repetitive and doesn't feel rewarding.",Reddit,2026-09-07,en
+001,The new boss is cool but WHY does phase 2 have so much invulnerability 😭,Reddit,2026-09-02,en
+7,Please let us skip the dialogue I've already read 3 times,YouTube,2026-09-03,en
+#夜航,抽卡歪了……我真的会谢,米游社,2026-09-04,zh-Hans
+星砂☆,枫丹的音乐真的绝了，跑图都不想开加速,微信,2026-09-05,zh-Hans
+ねこ!?,樹脂が足りない、あと20くらい欲しい,LINE,2026-09-06,ja
+소원-42,이번 이벤트 스토리 미쳤다… 마지막 장면 진짜 좋았음,YouTube,2026-09-07,ko
+UID:0009,Can we PLEASE get loadouts for artifacts,HoYoLAB,2026-09-08,en
+旅人_雨,手机发热也太严重了吧，玩半小时像暖手宝,微博,2026-09-09,zh-Hans
+小月亮_８,新活动的小游戏有点重复，希望下次多一点变化,米游社,2026-09-10,zh-Hans
+かなで♪,キャラの表情が細かくて好き。こういう演出もっと見たい,X,2026-09-11,ja
+민트초코,업데이트 후 로딩이 너무 길어졌어요 ㅠㅠ,Instagram,2026-09-12,ko
+A!B?,"The English localization is mostly great, but this one line sounds really off",Facebook,2026-09-13,en
+璃月·茶,每日委托能不能再少一点点，真的有点疲劳了,米游社,2026-09-14,zh-Hans
+港邊的風,這次活動的配樂太好聽了，聽到不想跳過劇情,Facebook,2026-09-15,zh-Hant
+ゆきだるま_5,ガチャ石もうちょっと配ってくれてもよくない？,LINE,2026-09-16,ja
+별빛!,캐릭터 디자인은 좋은데 전투가 좀 밋밋해요,HoYoLAB,2026-09-17,ko
+MoraMora,I love the lore but I need a recap button for returning players,Reddit,2026-09-18,en
+小林不困,新角色手感很好，普攻衔接特别顺,微信,2026-09-19,zh-Hans
+燈火-二,繁中有幾句翻譯怪怪的，語氣跟角色個性不太搭,Facebook,2026-09-20,zh-Hant
+お茶🍵,デイリーの報酬、もう少し増えたらうれしいな,YouTube,2026-09-21,ja
+고양이발,가끔 버튼이 눌렸는데 반응이 없어요. 저만 그런가요?,Instagram,2026-09-22,ko
+NoelleMain,"The shield timing feels inconsistent on mobile, especially with high ping",Reddit,2026-09-23,en
+风起时,希望尘歌壶能有更多预设方案，不然每次摆家具好累,米游社,2026-09-24,zh-Hans
+海鹽奶蓋,角色語音切換語言後有幾句好像沒對上字幕,LINE,2026-09-25,zh-Hant
+さかな_77,敵の攻撃範囲が見づらい時がある。エフェクト少し調整してほしい,YouTube,2026-09-26,ja
+달빛산책,이벤트 맵이 예쁜데 길 찾기가 너무 헷갈림,YouTube,2026-09-27,ko
+~spiral~,Abyss reset day and I'm already tired lol,Instagram,2026-09-28,en
+秋天的雲,新版本的劇情節奏很好，角色之間的互動也自然,Facebook,2026-09-29,zh-Hant
+旅の途中,探索してるだけで楽しい。新マップの高低差いいね,HoYoLAB,2026-09-30,ja
+김밥한줄,무과금도 할 만해서 좋아요. 이번 보상은 만족!,Facebook,2026-10-01,ko
+Klee??,The camera gets stuck behind walls during combat sometimes,Reddit,2026-10-02,en
+云朵邮差,这段剧情我哭了，角色塑造真的有进步,米游社,2026-10-03,zh-Hans
+小島的晚風,活動任務指引有點不清楚，我繞了好幾圈才找到地方,Instagram,2026-10-04,zh-Hant
+ミルクティー,スマホだと元素爆発が重なった時にカクつく,LINE,2026-10-05,ja
+하늘콩,고객센터 답변은 빨랐는데 문제 해결은 안 됐어요,Facebook,2026-10-06,ko
+critRate?,Artifact sorting needs more filters. Searching every piece is pain,Reddit,2026-10-07,en
+小熊饼干,能不能把背包里的材料按用途分类一下，找起来方便点,米游社,2026-10-08,zh-Hans
+夜市散步,角色待機動作很可愛，細節真的有用心,Instagram,2026-10-09,zh-Hant
+しろくま_12,マルチの招待通知、もう少し目立つようにしてほしい,YouTube,2026-10-10,ja
+초코우유,새 캐릭터 목소리랑 연기가 너무 잘 어울려요,Instagram,2026-10-11,ko
+GGwp,"I don't mind grinding, but the weekly cap makes it feel pointless",Reddit,2026-10-12,en
+风铃草,有些任务不能联机一起做，有点可惜,米游社,2026-10-13,zh-Hans
+雨の日,這次更新後相簿裡的截圖排序好像亂掉了,Facebook,2026-10-14,zh-Hant
+ねむいzz,任務の目的地がマップ上でもっと分かりやすいと助かる,LINE,2026-10-15,ja
+파란별,업적 조건이 너무 숨겨져 있어서 공략 없이는 못 찾겠어요,YouTube,2026-10-16,ko
+PatchNotesPls,Could we get patch notes with more specific numbers for balance changes?,Reddit,2026-10-17,en
+月下听风,新角色强度还行，但命座差距感觉有点大,米游社,2026-10-18,zh-Hans
+小海星★,希望可以調整語音包下載方式，不想每次都重新下載,Facebook,2026-10-19,zh-Hant
+おにぎり丸,ボスの素材ドロップ率、体感ずっと低いんだけど…,HoYoLAB,2026-10-20,ja
+밤하늘_03,스토리 컷신 스킵은 없어도 괜찮은데 다시 보기 기능은 있었으면,LINE,2026-10-02,ko
+Lore enjoyer,"The new quest hit hard ngl, but the ending felt rushed",Reddit,2026-09-02,en
+小橘子,这段配音太有感染力了，鸡皮疙瘩起来了,微信,2026-09-03,zh-Hans
+阿喵,這個角色的技能特效很漂亮，但畫面有點太花,Facebook,2026-09-04,zh-Hant
+やったー!,新しいエリアの探索、景色が最高。でも宝箱探しは大変,YouTube,2026-09-05,ja
+수정구슬,이번 배너는 패스… 다음 캐릭터 기다릴게요,Instagram,2026-09-06,ko
+mlem_mlem,Please add a way to mark quests as 'come back later',HoYoLAB,2026-09-07,en
+小小旅行家,活动奖励还不错，就是任务流程有点长,米游社,2026-09-08,zh-Hans
+月光海岸,配對時常常等很久，想跟朋友打個副本而已,LINE,2026-09-09,zh-Hant
+猫舌,ボイスの音量バランス、キャラによって違いすぎる気がする,YouTube,2026-09-10,ja
+감자튀김,캐릭터 창에서 무기랑 성유물 비교하기가 불편해요,HoYoLAB,2026-09-11,ko
+KazuhaPls,The soundtrack makes exploration so much better. Never gets old,Reddit,2026-09-12,en
+小鱼干,希望活动商店能显示每种奖励还剩多少没兑换,米游社,2026-09-13,zh-Hans
+午後茶,繁體中文的技能說明有幾處用詞不一致,Facebook,2026-09-14,zh-Hant
+うさぎの夢,元素スキルのクールタイム表示、もっと見やすくして！,LINE,2026-09-15,ja
+라면국물,서버 선택이 자동으로 되면 좋겠어요. 매번 바꾸기 귀찮음,Instagram,2026-09-16,ko
+just one more pull,I know it's RNG but losing the 50/50 again hurts 🥲,Reddit,2026-09-17,en
+旅人小周,新地图的解谜难度刚好，不用一直看攻略,米游社,2026-09-18,zh-Hans
+小雨傘,希望可以把常用隊伍固定在最前面，不用每次找,LINE,2026-09-19,zh-Hant
+夜更かし勢,長時間プレイするとスマホがかなり熱くなる,YouTube,2026-09-20,ja
+달고나,이 캐릭터 조합 진짜 재밌다ㅋㅋ 딜도 잘 나와요,Instagram,2026-09-21,ko
+Mika?,"I love the story, 但 the quest markers are kinda confusing",Reddit,2026-09-22,en+zh-Hans
+这次真的帅,The boss music is 🔥 and the phase transition is so good,YouTube,2026-09-23,zh-Hans+en
+繁中玩家,This subtitle feels wrong，角色講話不是這種感覺,Facebook,2026-09-24,zh-Hant+en
+ゆめ / dream,ストーリーは最高だけど resin が足りない 😭,LINE,2026-09-25,ja+en
+이건 진짜,The update is fun인데 로딩이 너무 길어요,Instagram,2026-09-26,ko+en
+小猫观察员,Please add artifact presets，真的每次换队都好麻烦,米游社,2026-09-27,zh-Hans+en
+夏の旅人,"新イベントの演出が好き, but the rewards feel a bit low",YouTube,2026-09-28,ja+en
+게임하는곰,스토리는 좋았는데 the ending was too short,Facebook,2026-09-29,ko+en
+阿澄的日常,"這次的音樂真的好聽, I stayed in the area just to listen",Instagram,2026-09-30,zh-Hant+en
+Koko★,翻訳がちょっと weird in this scene，ニュアンスが違う気がする,LINE,2026-10-01,ja+en
+冰可樂,手机端掉帧有点多 after the latest update,米游社,2026-10-02,zh-Hans+en
+星のかけら,このボスの攻撃 hitbox seems weird sometimes,HoYoLAB,2026-10-03,ja+en
+민초단,이벤트 맵 예쁜데 navigation is confusing,YouTube,2026-10-04,ko+en
+旅人A-17,"希望增加更多配队保存位, switching teams is a hassle",米游社,2026-10-05,zh-Hans+en
+海風の音,劇情很棒！but I wish there were more replay options,Facebook,2026-10-06,zh-Hant+en
+:),Can we get a training dummy that shows real damage numbers?,Reddit,2026-10-07,en
+!!!,这周的活动好肝啊，做完已经没电了,米游社,2026-10-08,zh-Hans
+ㅇㅇ_77,공지에 적힌 보상 수량이 게임 안이랑 달랐어요,YouTube,2026-10-09,ko
+はてな？,問い合わせフォームで添付ファイルが送れなかった,LINE,2026-10-10,ja
+「風」,繁中介面的部分按鈕文字被截斷了,Facebook,2026-10-11,zh-Hant
+Mora=0,"I'm broke in-game again, why are talent books so expensive lol",Instagram,2026-10-12,en
+樱花雨,新手引导讲得不够清楚，刚开始玩真的有点懵,米游社,2026-10-13,zh-Hans
+しずく*,フレンドのオンライン表示がたまに更新されないです,HoYoLAB,2026-10-14,ja
+달빛-88,한국어 번역에서 용어가 업데이트 전이랑 달라서 헷갈려요,YouTube,2026-10-15,ko
+紙飛行機,希望增加一個簡單的拍照姿勢收藏功能,Instagram,2026-10-16,zh-Hant
+Alt+F4?,The game crashed after I changed graphics settings. Happened twice,Reddit,2026-10-17,en
+白桃乌龙,新角色的待机动作有彩蛋吗？我看了好几遍,微信,2026-10-18,zh-Hans
+ねこねこ,イベントの説明文が長すぎて要点が分かりにくい,LINE,2026-10-19,ja
+별가루,문의 답변은 친절했지만 복구까지 너무 오래 걸렸어요,Facebook,2026-10-20,ko
+結局だれ？,キャラの名前表記が字幕と図鑑で違ってるように見える,YouTube,2026-10-21,ja

@@ -4,22 +4,44 @@ import pandas as pd
 from src.llm import classify_batch
 
 def load_feedback(path):
-    df = pd.read_csv(path).copy()
+    # Read IDs as strings to preserve numeric IDs and leading zeros.
+    df = pd.read_csv(
+        path,
+        dtype={"id": "string"},
+        keep_default_na=False
+    ).copy()
+
     required = {"id", "text"}
     missing = required - set(df.columns)
+
     if missing:
         raise ValueError(f"Missing required columns: {sorted(missing)}")
-    # Preserve the input language label separately from the model's prediction.
+
+    # Preserve the supplied language separately from the model's prediction.
     if "language" in df.columns:
         df = df.rename(columns={"language": "provided_language"})
-    # Clean comment text.
+
+    # Normalize IDs and comment text.
+    df["id"] = df["id"].fillna("").astype(str).str.strip()
     df["text"] = df["text"].fillna("").astype(str).str.strip()
-    # Remove empty comments and duplicate IDs.
-    df = df[df["text"] != ""].drop_duplicates("id")
+
+    # Remove comments with empty text.
+    df = df[df["text"] != ""].copy()
+
+    # Every remaining comment must have an ID.
+    if df["id"].eq("").any():
+        raise ValueError(
+            "Every non-empty feedback row must have a non-empty id."
+        )
+
+    # Keep only the first occurrence of each ID.
+    df = df.drop_duplicates(subset="id")
+
     # Add optional metadata columns if absent.
     for col in ["source", "date"]:
         if col not in df.columns:
             df[col] = ""
+
     return df
 
 def chunks(records, size):
